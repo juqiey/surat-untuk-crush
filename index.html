@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buka Bila Perlu 💬</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background: #ff758c;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #ff5e6c;
+        }
+        .compliment {
+            position: absolute;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            animation: fadeOut 3s ease-in-out;
+        }
+        .hidden-message {
+            display: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            color: white;
+        }
+        .gif-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .gif-container img {
+            width: 200px;
+            border-radius: 10px;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Untuk Yang Teristimewa 💬</h1>
+        <p>Tekan button untuk suprise! 💖</p>
+        <button onclick="confirmCompliment()">💬 Tekan sini 💬</button>
+        <button id="reveal-button" onclick="revealMessage()" style="display: none;">💌 Surat untuk yang teristimewa 💌</button>
+        <p id="secret-message" class="hidden-message">I've been meaning to tell you... I really like you. ❤️</p>
+        <div id="gif-container" class="gif-container">
+            <img id="compliment-gif" src="" alt="Cute GIF">
+        </div>
+    </div>
+
+    <script>
+        const compliments = [
+            "Awak comel lah!",
+            "Hai, cantik!",
+            "Sihat selalu si cantik!",
+            "Awak paling cantik!",
+            "Memang comel!",
+            "Orang paling sweet!",
+            "Kenapa cantik sangat",
+            "Senyuman anggun!",
+            "Tanpa kamu hari saya tidak sempurna!",
+            "Senyum selalu ya cantik!"
+        ];
+
+        const gifLinks = [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSwn1LN2dDPIyAOoELAnegCHrnVDKGNAH24g&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYfmgVgMnkj3A-27bflsY9w-7Q3H9zL9ZvJA&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn1AKMAsC0tJfTSWSxLvPx5NigXOhzvo_yQJqWdxA73wkPxGwjFt0on9oES7TxQ31bNyA&usqp=CAU",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPKQ3ARn9d9Ruf0q1yTcSXGyJS34Dp5hOoBLEfPv2YVteHJjEj6QL-0yamypYAkzF__k0&usqp=CAU"
+        ];
+
+        let complimentCount = 0;
+        let firstClick=true
+
+        function confirmCompliment() {
+            if(firstClick){
+                if (confirm("Betul ke ni? 💖")) {
+                    if(confirm("Yakin ke ni?")){
+                        if(confirm("Betul eh?")){
+                            firstClick=false
+                            showCompliment();
+                        }
+                    }
+                }
+            } else{
+                showCompliment();
+            }
+        }
+
+        function showCompliment() {
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+            const complimentElement = document.createElement("p");
+            complimentElement.textContent = randomCompliment;
+            complimentElement.classList.add("compliment");
+            
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            complimentElement.style.left = `${x}px`;
+            complimentElement.style.top = `${y}px`;
+            
+            document.body.appendChild(complimentElement);
+            setTimeout(() => complimentElement.remove(), 3000);
+            
+            const randomGif = gifLinks[Math.floor(Math.random() * gifLinks.length)];
+            document.getElementById("compliment-gif").src = randomGif;
+            document.getElementById("gif-container").style.display = "block";
+            
+            complimentCount++;
+            if (complimentCount >= 10) {
+                document.getElementById("reveal-button").style.display = "inline-block";
+            }
+        }
+
+        function revealMessage() {
+            document.getElementById("secret-message").style.display = "block";
+        }
+    </script>
+</body>
+</html>
