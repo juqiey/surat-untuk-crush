@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- Previous head section remains the same -->
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buka Bila Perlu 💬</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Previous styles remain the same until envelope-front */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff7eb3, #ff8fa3);
+            background: linear-gradient(-45deg, #006e51, #26a65b, #f4a261, #f39c12);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: #fff;
@@ -35,12 +33,25 @@
             backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 119, 140, 0.3);
+            box-shadow: 0 8px 32px rgba(38, 166, 91, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+        
+        .batik-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M25,25 Q50,0 75,25 T75,75 Q50,100 25,75 T25,25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 100px 100px;
+            border-radius: 20px;
+            z-index: -1;
         }
 
         button {
-            background: linear-gradient(45deg, #ff5e7d, #ff7eb3);
+            background: linear-gradient(45deg, #006e51, #26a65b);
             border: none;
             padding: 15px 30px;
             font-size: 1.5em;
@@ -49,130 +60,16 @@
             cursor: pointer;
             margin: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 94, 124, 0.3);
+            box-shadow: 0 4px 15px rgba(38, 166, 91, 0.3);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
         }
 
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 94, 124, 0.4);
+            box-shadow: 0 6px 20px rgba(38, 166, 91, 0.4);
         }
 
-        .envelope-wrapper {
-            display: none;
-            perspective: 1000px;
-            margin-top: 30px;
-        }
-
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            margin: 0 auto;
-            transform-style: preserve-3d;
-            transition: transform 1s;
-            cursor: pointer;
-            animation: float 2s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .envelope:hover {
-            animation-play-state: paused;
-        }
-
-        .envelope.open {
-            transform: rotateX(180deg);
-            animation: none;
-        }
-
-        .envelope-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #ff7eb3;
-            border-radius: 10px;
-            transform-origin: bottom;
-            transition: transform 0.6s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            backface-visibility: hidden;
-        }
-
-        .click-hint {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            bottom: -30px;
-            font-size: 0.9em;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .envelope:hover .click-hint {
-            opacity: 1;
-        }
-
-        .envelope.open .envelope-front {
-            transform: rotateX(180deg);
-        }
-
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #ff5e7d;
-            border-radius: 10px;
-            transform: rotateX(180deg);
-            backface-visibility: hidden;
-        }
-
-        .letter {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            color: #ff5e7d;
-            font-size: 1.2em;
-            transform: translateY(-100%) rotateX(180deg);
-            opacity: 0;
-            transition: all 0.6s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .envelope.open .letter {
-            transform: translateY(5%) rotateX(180deg);
-            opacity: 1;
-            transition-delay: 0.6s;
-        }
-
-        .flap {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: #ff8fa3;
-            clip-path: polygon(0 0, 50% 50%, 100% 0);
-            transform-origin: top;
-            transition: transform 0.6s;
-        }
-
-        .envelope.open .flap {
-            transform: rotateX(180deg);
-        }
-
-        /* Rest of the previous styles remain the same */
         .gif-container {
             margin-top: 20px;
             display: none;
@@ -182,6 +79,7 @@
             width: 200px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #f39c12;
         }
 
         .compliment {
@@ -191,17 +89,32 @@
             color: #fff;
             animation: fadeOut 3s ease-in-out;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Quicksand', sans-serif;
         }
 
         h1 {
             margin-bottom: 20px;
             font-size: 2.2em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffe268;
+        }
+
+        h1::before, h1::after {
+            content: "❁";
+            display: inline-block;
+            margin: 0 10px;
+            color: #f39c12;
+            font-size: 0.8em;
         }
 
         p {
             font-size: 1.2em;
             margin-bottom: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
         }
 
         @keyframes fadeOut {
@@ -209,47 +122,162 @@
             50% { opacity: 1; transform: scale(1.1); }
             100% { opacity: 0; transform: scale(1); }
         }
+        
+        /* Fixed styles for typewriter effect */
+        .typewriter-container {
+            display: none;
+            margin: 40px auto;
+            min-height: 150px;
+            max-width: 100%;
+        }
+        
+        .typewriter-text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.8em;
+            line-height: 1.5;
+            display: block;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            margin: 0 auto;
+            padding: 0 15px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            white-space: normal;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Style for decision buttons */
+        .decision-buttons {
+            display: none;
+            margin-top: 30px;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(45deg, #006e51, #26a65b);
+        }
+        
+        .no-btn {
+            background: linear-gradient(45deg, #7b7b7b, #a5a5a5);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        /* Pop-up message */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background: linear-gradient(45deg, #006e51, #26a65b);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 80%;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 0 30px rgba(38, 166, 91, 0.7);
+            animation: heartbeat 1.5s infinite;
+            letter-spacing: 1px;
+            border: 5px solid #f39c12;
+        }
+        
+        /* Malaysian motifs */
+        .motif {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .motif-1 {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L90,50 L50,90 L10,50 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
+            animation: rotate 30s linear infinite;
+        }
+        
+        .motif-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
+            animation: rotate 25s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
         @media screen and (max-width: 600px) {
-            .envelope {
-                width: 80vw;
-                height: 150px;
+            .container {
+                padding: 20px;
+                margin: 10px;
             }
-
-            .envelope-front, .envelope-back {
-                width: 100%;
-                height: 100%;
+            
+            button {
+                padding: 12px 24px;
+                font-size: 1.2em;
             }
-
-            .letter {
-                width: 90%;
-                font-size: 1em;
-                transform: translateY(-120%) rotateX(180deg);
+            
+            .typewriter-text {
+                font-size: 1.5em;
             }
-
-            .envelope.open .letter {
-                transform: translateY(0) rotateX(180deg);
+            
+            .popup-content {
+                font-size: 2em;
+                padding: 30px;
+            }
+            
+            .decision-buttons {
+                gap: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="motif motif-1"></div>
+    <div class="motif motif-2"></div>
+    
     <div class="container">
+        <div class="batik-pattern"></div>
         <h1>Untuk Yang Teristimewa 💬</h1>
         <p>Tekan button untuk suprise! 💖</p>
         <button onclick="confirmCompliment()">💬 Tekan sini 10 kali je💬</button>
-        <button id="reveal-button" onclick="showEnvelope()" style="display: none;">💌 Surat untuk yang teristimewa 💌</button>
+        <button id="reveal-button" onclick="showTypewriter()" style="display: none;">💌 Mesej untuk yang teristimewa 💌</button>
         
-        <div id="envelope-wrapper" class="envelope-wrapper">
-            <div class="envelope" onclick="openEnvelope(this)">
-                <div class="envelope-front">
-                    💌
-                    <div class="flap"></div>
-                </div>
-                <div class="envelope-back"></div>
-                <div class="letter">
-                    Sebenarnya, saya suka awak, dari awal kita kenal sampai sekarang ❤️
-                </div>
-                <div class="click-hint">Click to open ✨</div>
+        <div id="typewriter-container" class="typewriter-container">
+            <div id="typewriter-text" class="typewriter-text"></div>
+            
+            <div id="decision-buttons" class="decision-buttons">
+                <button class="yes-btn" onclick="showLoveMessage()">Ya</button>
+                <button id="no-button" class="no-btn" onmouseover="moveButton()">Tidak</button>
             </div>
         </div>
 
@@ -257,9 +285,14 @@
             <img id="compliment-gif" src="" alt="Cute GIF">
         </div>
     </div>
+    
+    <div id="love-popup" class="popup">
+        <div class="popup-content">
+            Saya Cintakan Awak! ❤️
+        </div>
+    </div>
 
     <script>
-        // Previous script remains the same
         const compliments = [
             "Awak comel lah!",
             "Hai, cantik!",
@@ -322,14 +355,62 @@
             }
         }
 
-        function showEnvelope() {
-            document.getElementById("envelope-wrapper").style.display = "block";
-        }
-
-        function openEnvelope(envelope) {
-            if (!envelope.classList.contains('open')) {
-                envelope.classList.add('open');
+        // Modified typewriter effect function for proper text wrapping
+        function typeWriter(text, i, fnCallback) {
+            if (i < text.length) {
+                document.getElementById("typewriter-text").innerHTML = text.substring(0, i+1) + '<span aria-hidden="true"></span>';
+                
+                // Set delay between each character
+                setTimeout(function() {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 100);
+            } else if (typeof fnCallback == 'function') {
+                setTimeout(fnCallback, 700);
             }
+        }
+        
+        function showTypewriter() {
+            document.getElementById("typewriter-container").style.display = "block";
+            // Hide the buttons
+            document.getElementById("reveal-button").style.display = "none";
+            
+            // Start typewriter with message
+            const text = "Kau seperti senja, indah tapi tak tergapai. Namun, jika hatimu sudi, biar aku jadi malam yang setia menemani. Maukah kau menerima hatiku?";
+            typeWriter(text, 0, function() {
+                // After typing is complete, show the buttons
+                document.getElementById("decision-buttons").style.display = "flex";
+            });
+        }
+        
+        // Move the No button randomly when hovered
+        function moveButton() {
+            const noButton = document.getElementById("no-button");
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+            
+            // Calculate maximum possible positions while keeping button visible
+            const maxX = window.innerWidth - buttonWidth - 20;
+            const maxY = window.innerHeight - buttonHeight - 20;
+            
+            // Generate random position
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            
+            // Apply new position
+            noButton.style.position = "fixed";
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+        }
+        
+        // Show love message popup
+        function showLoveMessage() {
+            const popup = document.getElementById("love-popup");
+            popup.style.display = "flex";
+            
+            // Add click event to close popup
+            popup.addEventListener("click", function() {
+                popup.style.display = "none";
+            });
         }
     </script>
 </body>
