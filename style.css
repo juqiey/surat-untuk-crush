@@ -1,0 +1,386 @@
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #006e51, #26a65b, #f4a261, #f39c12);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(38, 166, 91, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .batik-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M25,25 Q50,0 75,25 T75,75 Q50,100 25,75 T25,25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 100px 100px;
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        button {
+            background: linear-gradient(45deg, #006e51, #26a65b);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(38, 166, 91, 0.3);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            max-width: 100%;
+            white-space: normal;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(38, 166, 91, 0.4);
+        }
+
+        .gif-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .gif-container img {
+            width: 200px;
+            max-width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #f39c12;
+        }
+
+        .compliment {
+            position: fixed;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            animation: fadeOut 3s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Quicksand', sans-serif;
+            max-width: 70%;
+            z-index: 100;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffe268;
+        }
+
+        h1::before, h1::after {
+            content: "❁";
+            display: inline-block;
+            margin: 0 10px;
+            color: #f39c12;
+            font-size: 0.8em;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+        
+        .typewriter-container {
+            display: none;
+            margin: 40px auto;
+            min-height: 150px;
+            max-width: 100%;
+        }
+        
+        .typewriter-text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.8em;
+            line-height: 1.5;
+            display: block;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            margin: 0 auto;
+            padding: 0 15px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            white-space: normal;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .decision-buttons {
+            display: none;
+            margin-top: 30px;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(45deg, #006e51, #26a65b);
+        }
+        
+        .no-btn {
+            background: linear-gradient(45deg, #7b7b7b, #a5a5a5);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background: linear-gradient(45deg, #006e51, #26a65b);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 90%;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 0 30px rgba(38, 166, 91, 0.7);
+            animation: heartbeat 1.5s infinite;
+            letter-spacing: 1px;
+            border: 5px solid #f39c12;
+        }
+        
+        .motif {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .motif-1 {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L90,50 L50,90 L10,50 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
+            animation: rotate 30s linear infinite;
+        }
+        
+        .motif-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
+            animation: rotate 25s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Added elements for enhanced romance */
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            top: -10%;
+            animation: falling 10s linear forwards;
+            z-index: -1;
+        }
+        
+        @keyframes falling {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f39c12;
+            top: -10px;
+            z-index: 99;
+        }
+        
+        .love-message {
+            margin-top: 20px;
+            display: none;
+            font-size: 1.3em;
+            color: #ffe268;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* More responsive adjustments */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h1::before, h1::after {
+                margin: 0 5px;
+            }
+            
+            button {
+                padding: 12px 20px;
+                font-size: 1.2em;
+                margin: 8px 5px;
+                width: auto;
+            }
+            
+            .typewriter-text {
+                font-size: 1.4em;
+                padding: 0 10px;
+            }
+            
+            .popup-content {
+                font-size: 1.8em;
+                padding: 25px;
+                max-width: 80%;
+            }
+            
+            .decision-buttons {
+                gap: 15px;
+            }
+            
+            .gif-container img {
+                width: 150px;
+            }
+            
+            .compliment {
+                font-size: 1.2em;
+                max-width: 80%;
+            }
+            
+            .music-control {
+                width: 40px;
+                height: 40px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+        
+        /* For very small screens */
+        @media screen and (max-width: 350px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .typewriter-text {
+                font-size: 1.2em;
+            }
+            
+            .popup-content {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+        }

@@ -5,261 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buka Bila Perlu 💬</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #006e51, #26a65b, #f4a261, #f39c12);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(38, 166, 91, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-        }
-        
-        .batik-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M25,25 Q50,0 75,25 T75,75 Q50,100 25,75 T25,25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
-            background-size: 100px 100px;
-            border-radius: 20px;
-            z-index: -1;
-        }
-
-        button {
-            background: linear-gradient(45deg, #006e51, #26a65b);
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.5em;
-            color: white;
-            border-radius: 15px;
-            cursor: pointer;
-            margin: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(38, 166, 91, 0.3);
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(38, 166, 91, 0.4);
-        }
-
-        .gif-container {
-            margin-top: 20px;
-            display: none;
-        }
-
-        .gif-container img {
-            width: 200px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 3px solid #f39c12;
-        }
-
-        .compliment {
-            position: absolute;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #fff;
-            animation: fadeOut 3s ease-in-out;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2.2em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffe268;
-        }
-
-        h1::before, h1::after {
-            content: "❁";
-            display: inline-block;
-            margin: 0 10px;
-            color: #f39c12;
-            font-size: 0.8em;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 500;
-        }
-
-        @keyframes fadeOut {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1); }
-        }
-        
-        /* Fixed styles for typewriter effect */
-        .typewriter-container {
-            display: none;
-            margin: 40px auto;
-            min-height: 150px;
-            max-width: 100%;
-        }
-        
-        .typewriter-text {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.8em;
-            line-height: 1.5;
-            display: block;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            hyphens: auto;
-            margin: 0 auto;
-            padding: 0 15px;
-            color: #fff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            white-space: normal;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Style for decision buttons */
-        .decision-buttons {
-            display: none;
-            margin-top: 30px;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .yes-btn {
-            background: linear-gradient(45deg, #006e51, #26a65b);
-        }
-        
-        .no-btn {
-            background: linear-gradient(45deg, #7b7b7b, #a5a5a5);
-            position: relative;
-            transition: all 0.2s ease;
-        }
-        
-        /* Pop-up message */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
-        .popup-content {
-            background: linear-gradient(45deg, #006e51, #26a65b);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 80%;
-            text-align: center;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            color: white;
-            box-shadow: 0 0 30px rgba(38, 166, 91, 0.7);
-            animation: heartbeat 1.5s infinite;
-            letter-spacing: 1px;
-            border: 5px solid #f39c12;
-        }
-        
-        /* Malaysian motifs */
-        .motif {
-            position: absolute;
-            opacity: 0.1;
-            z-index: -1;
-        }
-        
-        .motif-1 {
-            top: 10%;
-            left: 5%;
-            width: 100px;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 L90,50 L50,90 L10,50 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
-            animation: rotate 30s linear infinite;
-        }
-        
-        .motif-2 {
-            bottom: 10%;
-            right: 5%;
-            width: 120px;
-            height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20 Z" stroke="white" fill="none" stroke-width="2"/></svg>');
-            animation: rotate 25s linear infinite reverse;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.05); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @media screen and (max-width: 600px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-            
-            button {
-                padding: 12px 24px;
-                font-size: 1.2em;
-            }
-            
-            .typewriter-text {
-                font-size: 1.5em;
-            }
-            
-            .popup-content {
-                font-size: 2em;
-                padding: 30px;
-            }
-            
-            .decision-buttons {
-                gap: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" media="all">
 </head>
 <body>
     <div class="motif motif-1"></div>
@@ -275,6 +21,8 @@
         <div id="typewriter-container" class="typewriter-container">
             <div id="typewriter-text" class="typewriter-text"></div>
             
+            <div id="love-message" class="love-message"></div>
+            
             <div id="decision-buttons" class="decision-buttons">
                 <button class="yes-btn" onclick="showLoveMessage()">Ya</button>
                 <button id="no-button" class="no-btn" onmouseover="moveButton()">Tidak</button>
@@ -289,9 +37,10 @@
     <div id="love-popup" class="popup">
         <div class="popup-content">
             Saya Cintakan Awak! ❤️
+            <div style="font-size: 0.5em; margin-top: 20px;">Kau adalah bintang yang menerangi gelapku</div>
         </div>
     </div>
-
+    
     <script>
         const compliments = [
             "Awak comel lah!",
@@ -303,7 +52,12 @@
             "Kenapa cantik sangat",
             "Senyuman anggun!",
             "Tanpa kamu hari saya tidak sempurna!",
-            "Senyum selalu ya cantik!"
+            "Senyum selalu ya cantik!",
+            "Awak seperti bulan, sentiasa menyinari hati saya",
+            "Cantik melebihi bunga di taman",
+            "Senyuman awak, ubat bagi hati saya",
+            "Terima kasih kerana hadir dalam hidup saya",
+            "Indahnya mata awak seperti bintang di langit"
         ];
 
         const gifLinks = [
@@ -312,9 +66,23 @@
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn1AKMAsC0tJfTSWSxLvPx5NigXOhzvo_yQJqWdxA73wkPxGwjFt0on9oES7TxQ31bNyA&usqp=CAU",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPKQ3ARn9d9Ruf0q1yTcSXGyJS34Dp5hOoBLEfPv2YVteHJjEj6QL-0yamypYAkzF__k0&usqp=CAU"
         ];
+        
+        const loveMessages = [
+            "Cinta itu seperti angin, tidak dapat dilihat tetapi dapat dirasakan.",
+            "Dalam hatimu, aku menemukan rumahku.",
+            "Kamu adalah impian yang menjadi nyata dalam hidupku.",
+            "Setiap detik bersamamu adalah hadiah yang tak ternilai.",
+            "Aku cinta kamu seperti ombak mencintai pantai, selalu kembali walau berulang kali."
+        ];
 
         let complimentCount = 0;
         let firstClick = true;
+        let musicPlaying = false;
+        
+        window.onload = function() {
+            // Add hearts animation on load
+            createHearts();
+        };
 
         function confirmCompliment() {
             if(firstClick) {
@@ -337,8 +105,11 @@
             complimentElement.textContent = randomCompliment;
             complimentElement.classList.add("compliment");
             
-            const x = Math.random() * (window.innerWidth - 200);
-            const y = Math.random() * (window.innerHeight - 100);
+            // Make sure compliments appear in viewport on mobile
+            const maxWidth = window.innerWidth - 100;
+            const maxHeight = window.innerHeight - 100;
+            const x = Math.random() * maxWidth;
+            const y = Math.random() * maxHeight;
             complimentElement.style.left = `${x}px`;
             complimentElement.style.top = `${y}px`;
             
@@ -355,7 +126,6 @@
             }
         }
 
-        // Modified typewriter effect function for proper text wrapping
         function typeWriter(text, i, fnCallback) {
             if (i < text.length) {
                 document.getElementById("typewriter-text").innerHTML = text.substring(0, i+1) + '<span aria-hidden="true"></span>';
@@ -377,9 +147,17 @@
             // Start typewriter with message
             const text = "Kau seperti senja, indah tapi tak tergapai. Namun, jika hatimu sudi, biar aku jadi malam yang setia menemani. Maukah kau menerima hatiku?";
             typeWriter(text, 0, function() {
-                // After typing is complete, show the buttons
+                // After typing is complete, show a love message and buttons
+                showLoveQuote();
                 document.getElementById("decision-buttons").style.display = "flex";
             });
+        }
+        
+        function showLoveQuote() {
+            const loveMessageEl = document.getElementById("love-message");
+            const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            loveMessageEl.textContent = randomMessage;
+            loveMessageEl.style.display = "block";
         }
         
         // Move the No button randomly when hovered
@@ -402,16 +180,89 @@
             noButton.style.top = randomY + "px";
         }
         
-        // Show love message popup
+        // Show love message popup with confetti effect
         function showLoveMessage() {
+            createConfetti();
             const popup = document.getElementById("love-popup");
             popup.style.display = "flex";
+            
+            // Play music if not already playing
+            if (!musicPlaying) {
+                toggleMusic();
+            }
             
             // Add click event to close popup
             popup.addEventListener("click", function() {
                 popup.style.display = "none";
             });
         }
+        
+        // Create falling hearts
+        function createHearts() {
+            const heartCount = 20;
+            const heartSymbols = ["❤️", "💖", "💕", "💓", "💗"];
+            
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement("div");
+                    heart.classList.add("heart");
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    
+                    // Random position and animation duration
+                    const leftPos = Math.random() * 100;
+                    const animDuration = 5 + Math.random() * 10;
+                    
+                    heart.style.left = `${leftPos}%`;
+                    heart.style.animationDuration = `${animDuration}s`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, animDuration * 1000);
+                }, i * 500); // Staggered creation
+            }
+            
+            // Create hearts periodically
+            setTimeout(createHearts, 15000);
+        }
+        
+        // Create confetti effect
+        function createConfetti() {
+            const confettiCount = 200;
+            const colors = ["#f39c12", "#ffe268", "#26a65b", "#e74c3c", "#3498db", "#9b59b6"];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                
+                // Random position, size, color and rotation
+                const leftPos = Math.random() * 100;
+                const width = 5 + Math.random() * 10;
+                const height = 5 + Math.random() * 10;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const rotation = Math.random() * 360;
+                
+                confetti.style.left = `${leftPos}%`;
+                confetti.style.width = `${width}px`;
+                confetti.style.height = `${height}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+                
+                // Random animation
+                const animDuration = 2 + Math.random() * 4;
+                confetti.style.animation = `falling ${animDuration}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, animDuration * 1000);
+            }
+        }
+        
     </script>
 </body>
 </html>
